@@ -240,20 +240,20 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 48.0f;
     return UIStatusBarStyleDefault;
 }
 
-- (BOOL)prefersStatusBarHidden
-{
-    // Disregard the transition animation if we're not actively overriding it
-    if (!self.overrideStatusBar) {
-        return self.statusBarHidden;
-    }
-
-    // Work out whether the status bar needs to be visible
-    // during a transition animation or not
-    BOOL hidden = YES; // Default is yes
-    hidden = hidden && !(self.inTransition); // Not currently in a presentation animation (Where removing the status bar would break the layout)
-    hidden = hidden && !(self.view.superview == nil); // Not currently waiting to be added to a super view
-    return hidden;
-}
+//- (BOOL)prefersStatusBarHidden
+//{
+//    // Disregard the transition animation if we're not actively overriding it
+//    if (!self.overrideStatusBar) {
+//        return self.statusBarHidden;
+//    }
+//
+//    // Work out whether the status bar needs to be visible
+//    // during a transition animation or not
+//    BOOL hidden = YES; // Default is yes
+//    hidden = hidden && !(self.inTransition); // Not currently in a presentation animation (Where removing the status bar would break the layout)
+//    hidden = hidden && !(self.view.superview == nil); // Not currently waiting to be added to a super view
+//    return hidden;
+//}
 
 - (UIRectEdge)preferredScreenEdgesDeferringSystemGestures
 {
@@ -1294,6 +1294,19 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 48.0f;
 - (CGFloat)minimumAspectRatio
 {
     return self.cropView.minimumAspectRatio;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    
+    return UIInterfaceOrientationPortrait;
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return true;
 }
 
 @end
